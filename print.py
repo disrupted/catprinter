@@ -9,7 +9,7 @@ from catprinter.ble import run_ble
 from catprinter.img import read_img
 
 
-def parse_args():
+def parse_args(argv=None):
     args = argparse.ArgumentParser(
         description='prints an image on your cat thermal printer')
     args.add_argument('filename', type=str)
@@ -23,7 +23,7 @@ def parse_args():
                       help='If set, displays the final image and asks the user for confirmation before printing.')
     args.add_argument('--devicename', type=str, default='GT01',
                       help='Specify the Bluetooth device name to search for. Default value is GT01.')
-    return args.parse_args()
+    return args.parse_args(argv)
 
 
 def make_logger(log_level):
@@ -35,8 +35,8 @@ def make_logger(log_level):
     return logger
 
 
-def main():
-    args = parse_args()
+def main(argv=None):
+    args = parse_args(argv)
 
     log_level = getattr(logging, args.log_level.upper())
     logger = make_logger(log_level)
